@@ -1,0 +1,10 @@
+name: Essentials
+version: ${project.version}
+main: io.github.bryanpaik.essentials.Essentials
+api-version: 1.17
+
+commands:
+  home:
+    description: Teleports you back to your bed.
+    usage: /<command>
+    permission: essentials.home
