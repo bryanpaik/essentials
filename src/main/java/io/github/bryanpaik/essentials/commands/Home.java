@@ -34,7 +34,7 @@ public class Home implements CommandExecutor, Listener {
             // if player does not have a bed
             if (player.getBedSpawnLocation() == null){
                 player.sendMessage(ChatColor.RED + "You do not have a bed!");
-                return false;
+                return true;
             }
 
             // initiates the teleport
