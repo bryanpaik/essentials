@@ -8,9 +8,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-public class Home implements CommandExecutor {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Home implements CommandExecutor, Listener {
+
+    private static Map<Player, BukkitTask> tasks = new HashMap<>();
+
     Essentials plugin;
+
     public Home(Essentials plugin){
         this.plugin = plugin;
     }
@@ -18,17 +30,26 @@ public class Home implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            Location startLoc = player.getLocation();
-            for(int i = 0; i < 5; i++){
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        sender.sendMessage("Test!");
-                    }
 
-                }, 20 * i); // 1 Second delay
+            // if player does not have a bed
+            if (player.getBedSpawnLocation() == null){
+                player.sendMessage(ChatColor.RED + "You do not have a bed!");
+                return false;
             }
 
+            // initiates the teleport
+            player.sendMessage(ChatColor.RED + "Do not move or teleport will be canceled!");
+
+            if (!tasks.containsKey(player)){
+                tasks.put(player, (new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        player.sendMessage(ChatColor.GREEN + "Teleporting Player!");
+                        player.teleport(player.getBedSpawnLocation());
+                    }
+                }).runTaskLater(plugin, 20L * 5));
+            }
+            return true;
         }
         else{
             sender.sendMessage(ChatColor.RED + "You are not a player!");
@@ -36,4 +57,19 @@ public class Home implements CommandExecutor {
         return false;
     }
 
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e){
+        Player p = e.getPlayer();
+
+        if((e.getTo().getX() != e.getFrom().getX()) || (e.getTo().getY() != e.getFrom().getY()) || (e.getTo().getZ() != e.getFrom().getZ())){
+            BukkitTask task = tasks.get(p);
+
+            if(task != null){
+                task.cancel();
+                tasks.remove(p);
+                p.sendMessage(ChatColor.RED + "Teleport Canceled");
+            }
+
+        }
+    }
 }
