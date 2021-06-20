@@ -9,4 +9,6 @@ A plugin made for a personal server plan create many cool features wow
 
 ## Permissions:
 - essentials.home 
+- essentials.tprequest
+- essentials.tpaccept
 
