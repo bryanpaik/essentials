@@ -8,3 +8,11 @@ commands:
     description: Teleports you back to your bed.
     usage: /<command>
     permission: essentials.home
+  tpa:
+    description: Teleport request to player.
+    usage: /<command>
+    permission: essentials.tprequest
+  tpaccept:
+    description: Accepts an existing tp request.
+    usage: /<command>
+    permission: essentials.tpaccept
