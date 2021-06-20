@@ -67,7 +67,7 @@ public class TeleportEvent implements Listener {
     public void onPlayerMove(PlayerMoveEvent e){
         Player p = e.getPlayer();
 
-        if((e.getTo().getX() != e.getFrom().getX()) || (e.getTo().getY() != e.getFrom().getY()) || (e.getTo().getZ() != e.getFrom().getZ())){
+        if((e.getTo().getBlockX() != e.getFrom().getBlockX()) || (e.getTo().getBlockY() != e.getFrom().getBlockY()) || (e.getTo().getBlockZ() != e.getFrom().getBlockZ())){
             BukkitTask task = tasks.get(p);
 
             if(task != null){
