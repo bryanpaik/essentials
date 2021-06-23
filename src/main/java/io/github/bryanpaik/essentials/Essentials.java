@@ -3,6 +3,7 @@ package io.github.bryanpaik.essentials;
 import io.github.bryanpaik.essentials.commands.Home;
 import io.github.bryanpaik.essentials.commands.TeleportAccept;
 import io.github.bryanpaik.essentials.commands.TeleportRequest;
+import io.github.bryanpaik.essentials.events.OnJoinEvent;
 import io.github.bryanpaik.essentials.events.TeleportEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -33,6 +34,7 @@ public final class Essentials extends JavaPlugin implements Listener {
         this.getCommand("tpa").setExecutor(new TeleportRequest(this));
         this.getCommand("tpaccept").setExecutor(new TeleportAccept(this));
         this.getServer().getPluginManager().registerEvents(new TeleportEvent(this),(this));
+        this.getServer().getPluginManager().registerEvents(new OnJoinEvent(this),(this));
     }
 
     /**
