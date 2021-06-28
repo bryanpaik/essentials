@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -35,6 +36,7 @@ public final class Essentials extends JavaPlugin implements Listener {
         this.getCommand("tpaccept").setExecutor(new TeleportAccept(this));
         this.getServer().getPluginManager().registerEvents(new TeleportEvent(this),(this));
         this.getServer().getPluginManager().registerEvents(new OnJoinEvent(this),(this));
+
     }
 
     /**
