@@ -16,7 +16,7 @@ public class OnJoinEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
-        p.sendMessage(ChatColor.AQUA + "Welcome " + e.getPlayer().getDisplayName() + " to the brain pike's server.");
+        p.sendMessage(ChatColor.AQUA + "Welcome " + e.getPlayer().getDisplayName() + " to brain pike's server.");
         p.sendMessage(ChatColor.AQUA + "There are " + plugin.getServer().getOnlinePlayers().size() + " player(s) online.");
         p.sendMessage(ChatColor.AQUA + "Use /help for a list of player commands.");
     }
